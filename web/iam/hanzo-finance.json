@@ -1,0 +1,24 @@
+{
+  "owner": "hanzo",
+  "name": "hanzo-finance",
+  "organization": "hanzo",
+  "displayName": "Hanzo Finance",
+  "description": "finance.hanzo.ai — Hanzo Finance product (ledger, payments, treasury).",
+  "homepageUrl": "https://finance.hanzo.ai",
+  "cert": "cert-built-in",
+  "clientId": "hanzo-finance",
+  "tokenFormat": "JWT",
+  "grantTypes": ["authorization_code", "refresh_token"],
+  "enablePassword": true,
+  "enableSignUp": true,
+  "enableCodeSignin": true,
+  "redirectUris": [
+    "https://finance.hanzo.ai/auth/callback",
+    "http://localhost:4200/auth/callback",
+    "http://localhost:4203/auth/callback"
+  ],
+  "signinMethods": [
+    { "name": "Password", "displayName": "Password", "rule": "All" },
+    { "name": "Verification code", "displayName": "Verification code", "rule": "All" }
+  ]
+}

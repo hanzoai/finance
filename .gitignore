@@ -1,0 +1,21 @@
+# Node / pnpm
+node_modules/
+.pnpm-store/
+
+# Builds
+dist/
+packages/*/dist/
+web/.next/
+web/next-env.d.ts
+web/out/
+*.tsbuildinfo
+
+# Env / local
+.env
+.env.local
+.env*.local
+.DS_Store
+
+# Go
+/finance
+*.test

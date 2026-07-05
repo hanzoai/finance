@@ -1,0 +1,27 @@
+{
+  "name": "@hanzo/finance-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "finance.hanzo.ai — Hanzo Finance product landing, IAM login, and treasury/payments app shell.",
+  "license": "BSD-3-Clause",
+  "author": "Hanzo AI <dev@hanzo.ai>",
+  "scripts": {
+    "dev": "next dev -p 4200",
+    "build": "next build",
+    "start": "next start -p 4200",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hanzo/finance-ui": "workspace:*",
+    "next": "15.5.19",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "server-only": "0.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.0",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3"
+  }
+}
