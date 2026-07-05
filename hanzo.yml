@@ -1,0 +1,46 @@
+# Canonical CI/CD config for hanzoai/finance — read by both the hanzoai/ci reusable
+# workflow (.github/workflows/cicd.yml) and platform.hanzo.ai (webhook →
+# BuildScheduler → arcd → operator rollout). The "one way" build+deploy contract.
+#
+# The finance Go core (this repo's umbrella) is EMBEDDED in the unified cloud binary
+# (hanzoai/cloud) via the subsystem blank-import pattern — it is NOT a standalone image.
+# The ONE deployable artifact here is the product web (finance.hanzo.ai): the landing +
+# Hanzo IAM login + the treasury/payments app shell, built from the pnpm workspace
+# (web/ consumes the shared @hanzo/finance-ui).
+
+images:
+  - name: finance-web
+    context: .
+    dockerfile: web/Dockerfile
+    repo: ghcr.io/hanzoai/finance-web
+
+# CI gates the image build can't cover: the shared package's unit tests + both
+# workspaces' typecheck. The arc runner ships Node; corepack pins pnpm.
+test:
+  - name: web-test
+    run: |
+      corepack enable && corepack prepare pnpm@9.15.9 --activate
+      pnpm install --frozen-lockfile
+      pnpm --filter @hanzo/finance-ui build
+      pnpm --filter @hanzo/finance-ui test
+      pnpm --filter @hanzo/finance-ui typecheck
+      pnpm --filter @hanzo/finance-web typecheck
+
+# Deploy finance.hanzo.ai onto the Hanzo operator. Fires only on `main` (+ tags), and
+# only when KMS hands back a kubeconfig — PRs and forks never deploy. The operator
+# Service CR + finance.hanzo.ai ingress live in hanzoai/universe (GitOps); this rolls
+# the freshly-built image onto it.
+deploy:
+  cluster: do-sfo3-hanzo-k8s
+  namespace: hanzo
+  # Quoted to dodge YAML 1.1 boolean coercion of a bare `on:` key.
+  "on": [main]
+  services:
+    - name: finance-web
+      image: finance-web
+
+# KMS (kms.hanzo.ai, Universal Auth) supplies the GHCR push token + the target
+# kubeconfig at run time. Only KMS_CLIENT_ID / KMS_CLIENT_SECRET live in GitHub.
+kms:
+  path: /deploy
+  environment: prod
