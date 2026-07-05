@@ -21,7 +21,12 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/packages/finance-ui/node_modules ./packages/finance-ui/node_modules
 COPY --from=deps /app/web/node_modules ./web/node_modules
 COPY . .
+# The image build is the single CI gate (the arc runner is bare — no Node). Build the
+# shared package, run its unit tests, then type-check + build the Next app. A failing
+# test or type error fails the image build, so nothing broken can deploy.
 RUN pnpm --filter @hanzo/finance-ui build \
+ && pnpm --filter @hanzo/finance-ui test \
+ && pnpm --filter @hanzo/finance-ui typecheck \
  && pnpm --filter @hanzo/finance-web build
 
 # ── runtime (Next standalone) ────────────────────────────────────────────────

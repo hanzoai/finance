@@ -14,17 +14,10 @@ images:
     dockerfile: web/Dockerfile
     repo: ghcr.io/hanzoai/finance-web
 
-# CI gates the image build can't cover: the shared package's unit tests + both
-# workspaces' typecheck. The arc runner ships Node; corepack pins pnpm.
-test:
-  - name: web-test
-    run: |
-      corepack enable && corepack prepare pnpm@9.15.9 --activate
-      pnpm install --frozen-lockfile
-      pnpm --filter @hanzo/finance-ui build
-      pnpm --filter @hanzo/finance-ui test
-      pnpm --filter @hanzo/finance-ui typecheck
-      pnpm --filter @hanzo/finance-web typecheck
+# No separate `test:` block: the arc runner is bare (no Node), so the image build is the
+# SINGLE gate — web/Dockerfile builds the shared package, runs its unit tests, and
+# type-checks + builds the Next app, so a failing test / type error fails the build and
+# nothing broken deploys. (Same pattern as hanzoai/console: the Dockerfile is the gate.)
 
 # Deploy finance.hanzo.ai onto the Hanzo operator. Fires only on `main` (+ tags), and
 # only when KMS hands back a kubeconfig — PRs and forks never deploy. The operator
