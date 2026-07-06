@@ -8,18 +8,21 @@ FROM public.ecr.aws/docker/library/node:22-alpine AS base
 RUN corepack enable && corepack prepare pnpm@9.15.9 --activate
 WORKDIR /app
 
-# ── deps (cached on lockfile) ────────────────────────────────────────────────
-FROM base AS deps
-COPY pnpm-workspace.yaml package.json pnpm-lock.yaml ./
+# ── build (install + gate + next build in one stage) ─────────────────────────
+FROM base AS build
+# Install deps first so the layer caches on the lockfile. `.npmrc` (node-linker=hoisted)
+# MUST be present before install: the canonical stack dedupes the Tamagui/@hanzo-gui
+# graph into a single hoisted tree, which is what lets the GuiCustomConfig type
+# augmentation reach the @hanzo/ui + @hanzo/data raw-TSX source. Under the isolated
+# linker (no .npmrc) that augmentation is lost and the type gate fails on every vendor
+# shorthand prop (bg/items/justify/rounded/…). Installing in this stage (not a separate
+# deps stage) keeps the hoisted node_modules linker-agnostic — no per-package
+# node_modules to cherry-pick across stages.
+COPY pnpm-workspace.yaml package.json pnpm-lock.yaml .npmrc ./
 COPY packages/finance-ui/package.json packages/finance-ui/
 COPY web/package.json web/
 RUN pnpm install --frozen-lockfile
-
-# ── build ────────────────────────────────────────────────────────────────────
-FROM base AS build
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/packages/finance-ui/node_modules ./packages/finance-ui/node_modules
-COPY --from=deps /app/web/node_modules ./web/node_modules
+# Overlay source; `**/node_modules` is .dockerignored so the install above survives.
 COPY . .
 # The image build is the single CI gate (the arc runner is bare — no Node). Build the
 # shared package, run its unit tests, then type-check + build the Next app. A failing
