@@ -26,7 +26,7 @@ import type {
   Usage,
   UsageLine,
   UsagePoint,
-} from './types.js'
+} from './types'
 
 /** The per-org finance reads. Every method is a plain read; writes stay in the billing portal. */
 export interface FinanceClient {
