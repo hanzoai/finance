@@ -1,17 +1,27 @@
 # @hanzo/finance-ui
 
-Shared finance data-layer + UI for the two Hanzo Finance surfaces —
-**finance.hanzo.ai** (the product shell) and the **Hanzo Cloud console** Finance
-module. One `FinanceClient`, one component set, monochrome, USD **cents** end to end,
-so a spend / usage / credits card looks and behaves identically in both.
+Shared finance data-layer + UI for every Hanzo Finance surface —
+**finance.hanzo.ai** (the tenant shell), the **Hanzo Cloud console** per-org Finance
+module, and the console **global-admin** finance view. One `FinanceClient`, one
+component set, monochrome, USD **cents** end to end — so a spend / usage / credits card
+looks and behaves identically at every scope. Scope (which org, or all-orgs) is a
+property of the injected transport + identity, **never a different UI**.
+
+Built on the canonical Hanzo component stack: **`@hanzo/ui`** (the product/dashboard
+layer — `MetricCard`, `Panel`, `DataTable`, `Sparkline`, `LineChart`, `StatusTag`, …)
+on **`@hanzo/gui`** (the Tamagui primitives). No hand-rolled CSS; every surface themes
+off the shared Gui token system, so a finance card reads like any other console module.
 
 ## Install
 
 ```bash
-npm i @hanzo/finance-ui
+npm i @hanzo/finance-ui @hanzo/ui @hanzo/gui
 ```
 
-`react` / `react-dom` are peers (≥18).
+`react` / `react-dom` (≥18) and **`@hanzo/gui` (≥7.2.2)** / **`@hanzo/ui` (≥8)** are
+peers — the HOST provides the `GuiProvider`. The package ships TS source (the canonical
+Hanzo pattern), so add `@hanzo/finance-ui`, `@hanzo/ui`, `@hanzo/gui`, `@hanzo/data`
+(and the transitive `@hanzogui/*`) to your bundler's `transpilePackages`.
 
 ## Use
 
@@ -48,8 +58,11 @@ degrades to `—`, an unconfigured backend yields honest zeros/empty, and a card
 masked to brand + last4 (a PAN can never reach the UI). A rejected read propagates so
 the host renders its own honest state — the client never fabricates.
 
-## Styling
+## Styling & theming
 
-Self-contained monochrome CSS, injected once by `<FinanceRoot>` (which
-`FinanceDashboard` renders by default). No CSS import, no bundler config. Theme-aware:
-light by default, dark via `prefers-color-scheme` or an explicit `theme="dark"`.
+Monochrome, on the shared `@hanzo/gui` token system — no CSS import, no hand-rolled
+stylesheet. The HOST mounts one `GuiProvider` (the console + finance.hanzo.ai both do);
+the board renders inside it. `<FinanceDashboard standalone>` (the default) wraps the
+board in a `Theme` scope + page background for a standalone host; pass
+`standalone={false}` inside an app that already mounts its own `GuiProvider`/`Theme`
+(the console). `theme="light" | "dark"` pins the scope; otherwise it follows the host.

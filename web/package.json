@@ -13,9 +13,16 @@
   },
   "dependencies": {
     "@hanzo/finance-ui": "workspace:*",
+    "@hanzo/data": "^1.2.0",
+    "@hanzo/gui": "^7.3.0",
+    "@hanzo/ui": "^8.0.0",
+    "@hanzogui/config": "^7.3.0",
+    "@hanzogui/lucide-icons-2": "^7.3.0",
+    "@hanzogui/next-theme": "^7.3.0",
     "next": "15.5.19",
     "react": "19.2.7",
     "react-dom": "19.2.7",
+    "react-native-web": "0.21.2",
     "server-only": "0.0.1"
   },
   "devDependencies": {

@@ -8,5 +8,10 @@
     "build": "pnpm --filter @hanzo/finance-ui build && pnpm --filter @hanzo/finance-web build",
     "test": "pnpm --filter @hanzo/finance-ui test",
     "typecheck": "pnpm --filter @hanzo/finance-ui typecheck && pnpm --filter @hanzo/finance-web typecheck"
+  },
+  "pnpm": {
+    "overrides": {
+      "react-native-web": "0.21.2"
+    }
   }
 }
