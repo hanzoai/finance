@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata, Viewport } from 'next'
 import { resolveConfig } from '~/config'
+import { GuiRoot } from '~/components/GuiRoot'
 
 const cfg = resolveConfig()
 
@@ -18,7 +19,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }): React.JSX.Element {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <GuiRoot>{children}</GuiRoot>
+      </body>
     </html>
   )
 }
