@@ -10,7 +10,11 @@ WORKDIR /app
 
 # ── deps (cached on lockfile) ────────────────────────────────────────────────
 FROM base AS deps
-COPY pnpm-workspace.yaml package.json pnpm-lock.yaml ./
+# `.npmrc` (node-linker=hoisted) MUST be present before install: the canonical stack
+# dedupes the Tamagui/@hanzo-gui graph via a single hoisted tree so the GuiCustomConfig
+# type augmentation reaches the @hanzo/ui + @hanzo/data source. Without it pnpm falls
+# back to the isolated linker and the type-check gate fails on vendor shorthand props.
+COPY pnpm-workspace.yaml package.json pnpm-lock.yaml .npmrc ./
 COPY packages/finance-ui/package.json packages/finance-ui/
 COPY web/package.json web/
 RUN pnpm install --frozen-lockfile
