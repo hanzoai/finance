@@ -9,19 +9,19 @@
     "dev": "next dev -p 4200",
     "build": "next build",
     "start": "next start -p 4200",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsgo --noEmit"
   },
   "dependencies": {
     "@hanzo/finance-ui": "workspace:*",
-    "@hanzo/data": "^1.2.0",
-    "@hanzo/gui": "^7.3.0",
-    "@hanzo/ui": "^8.0.0",
-    "@hanzogui/config": "^7.3.0",
-    "@hanzogui/lucide-icons-2": "^7.3.0",
-    "@hanzogui/next-theme": "^7.3.0",
+    "@hanzo/data": "^1.2.2",
+    "@hanzo/gui": "^8.0.1",
+    "@hanzo/ui": "^8.0.39",
+    "@hanzogui/config": "^8.0.1",
+    "@hanzogui/next-theme": "^8.0.0",
     "next": "15.5.19",
     "react": "19.2.7",
     "react-dom": "19.2.7",
+    "react-native-svg": "15.15.5",
     "react-native-web": "0.21.2",
     "server-only": "0.0.1"
   },
@@ -29,6 +29,7 @@
     "@types/node": "22.20.0",
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
+    "@typescript/native-preview": "^7.0.0-dev.20260707.2",
     "typescript": "5.9.3"
   }
 }

@@ -7,10 +7,11 @@ component set, monochrome, USD **cents** end to end — so a spend / usage / cre
 looks and behaves identically at every scope. Scope (which org, or all-orgs) is a
 property of the injected transport + identity, **never a different UI**.
 
-Built on the canonical Hanzo component stack: **`@hanzo/ui`** (the product/dashboard
-layer — `MetricCard`, `Panel`, `DataTable`, `Sparkline`, `LineChart`, `StatusTag`, …)
-on **`@hanzo/gui`** (the Tamagui primitives). No hand-rolled CSS; every surface themes
-off the shared Gui token system, so a finance card reads like any other console module.
+Built on the canonical Hanzo 8.x component stack: **`@hanzo/ui/product`** (the product
+layer — `DataTable`, `Sparkline`, `LineChart`, `StatusTag`, …) on **`@hanzo/gui`** (the
+Tamagui primitives). No Tailwind, no shadcn, no Radix, no hand-rolled CSS: every surface
+themes off the shared Gui token system, so a finance card reads like any other console
+module.
 
 ## Install
 
@@ -18,10 +19,13 @@ off the shared Gui token system, so a finance card reads like any other console 
 npm i @hanzo/finance-ui @hanzo/ui @hanzo/gui
 ```
 
-`react` / `react-dom` (≥18) and **`@hanzo/gui` (≥7.2.2)** / **`@hanzo/ui` (≥8)** are
-peers — the HOST provides the `GuiProvider`. The package ships TS source (the canonical
-Hanzo pattern), so add `@hanzo/finance-ui`, `@hanzo/ui`, `@hanzo/gui`, `@hanzo/data`
-(and the transitive `@hanzogui/*`) to your bundler's `transpilePackages`.
+`react` / `react-dom` (≥19) and **`@hanzo/gui` (≥8.0.1)** / **`@hanzo/ui` (≥8.0.39)**
+are peers — the HOST provides the `GuiProvider`, and it should mount
+`@hanzo/ui/gui-config` (the one canonical scale) rather than a copy of it.
+
+This package ships TS source, and `@hanzo/data` (a `@hanzo/ui` peer) does too, so both
+belong in your bundler's `transpilePackages`. Nothing else does: as of 8.x `@hanzo/ui`,
+`@hanzo/gui` and every `@hanzogui/*` package ship built dist.
 
 ## Use
 

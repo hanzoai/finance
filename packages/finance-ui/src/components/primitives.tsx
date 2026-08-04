@@ -11,14 +11,16 @@
  */
 import type { ReactNode } from 'react'
 import { Button, Card, Text, Theme, XStack, YStack } from '@hanzo/gui'
-import { Sparkline as UiSparkline } from '@hanzo/ui'
+import { Sparkline as UiSparkline, asColor } from '@hanzo/ui/product'
 import { deltaPct, formatMoney, formatPct } from '../format'
 import { RANGES, rangeLabel, type Range } from '../types'
 
-/** Semantic sign colors — the same green/red the canonical @hanzo/ui MetricCard uses
- *  (monochrome-first surfaces, a single accent hue only to signal +/-). */
-const POS = '#7ee787'
-const NEG = '#e5534b'
+/** Semantic sign colors — the ONE green/red pair for the whole finance surface
+ *  (monochrome-first surfaces, a single accent hue only to signal +/-). Exported so no
+ *  other finance module re-spells the hex; `asColor` is @hanzo/ui's sanctioned cast from
+ *  a raw CSS color to Gui's typed `color` prop. */
+export const POS = '#7ee787'
+export const NEG = '#e5534b'
 
 /**
  * The finance surface root — scopes the light/dark `Theme` and paints the page
@@ -57,7 +59,7 @@ export function Money({
   const signed = typeof cents === 'number' && cents !== 0
   const color = colored && signed ? (cents < 0 ? NEG : POS) : '$color12'
   return (
-    <Text fontSize={(size ?? '$3') as never} fontWeight={size ? '800' : undefined} color={color as never} numberOfLines={1}>
+    <Text fontSize={(size ?? '$3') as never} fontWeight={size ? '800' : undefined} color={asColor(color)} numberOfLines={1}>
       {formatMoney(cents, currency)}
     </Text>
   )
@@ -86,7 +88,7 @@ export function DeltaChip({ current, prior }: { current?: number; prior?: number
   const arrow = dir === 'up' ? '▲' : dir === 'down' ? '▼' : '→'
   const color = dir === 'up' ? POS : dir === 'down' ? NEG : '$color10'
   return (
-    <Text fontSize="$1" fontWeight="600" color={color as never}>
+    <Text fontSize="$1" fontWeight="600" color={asColor(color)}>
       {arrow} {formatPct(Math.abs(d))}
     </Text>
   )
@@ -202,7 +204,7 @@ export function StatusPill({ status }: { status?: string }): React.JSX.Element {
   const warn = ['open', 'past_due', 'overdue', 'unpaid', 'uncollectible', 'failed', 'void'].includes(s)
   const color = ok ? POS : warn ? NEG : '$color11'
   return (
-    <Text fontSize="$1" fontWeight="600" px="$2" py="$1" rounded="$3" bg="$color3" color={color as never} textTransform="capitalize">
+    <Text fontSize="$1" fontWeight="600" px="$2" py="$1" rounded="$3" bg="$color3" color={asColor(color)} textTransform="capitalize">
       {status || '—'}
     </Text>
   )
