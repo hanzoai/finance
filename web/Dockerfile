@@ -25,7 +25,7 @@ RUN pnpm install --frozen-lockfile
 # Overlay source; `**/node_modules` is .dockerignored so the install above survives.
 COPY . .
 # The image build is the single CI gate (the bare runner has no Node). Type-check the
-# shared package (its `build` IS `tsgo --noEmit` — TypeScript 7 native, one command, not
+# shared package (its `build` IS `tsc --noEmit` — one command, not
 # a second spelling of the same check), run its unit tests, then build the Next app. A
 # failing test or type error fails the image build, so nothing broken can deploy.
 RUN pnpm --filter @hanzo/finance-ui build \
