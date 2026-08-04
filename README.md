@@ -68,3 +68,34 @@ cash payouts drawing the same reserve.
 
 Each phase embeds into the unified cloud binary and surfaces in admin.hanzo.ai.
 No parallel finance system, no Formance runtime — one native ledger.
+
+## Where the code is today
+
+This repo is the declared home; the implementation currently lives at
+`hanzoai/cloud/apps/finance` (11 files, ~1378 lines) and is live — it serves
+`finance.authorize`, `finance.record` and `finance.balance` on the internal
+plane, and commerce injects its ledger adapter rather than owning a wallet.
+
+It is not extracted yet because that would close a module cycle. `apps/finance`
+imports `cloud/apps/money` (9×), `cloud/types` (8×), `cloud/internal/devmaster`
+and `cloud/apps/treasury/ledger`; `cloud/apps/billing` and `cloud/apps/admin`
+import it back. Lifting it out therefore requires hoisting `types`, `money` and
+`treasury/ledger` into shared packages FIRST — the same cycle that kept o11y's
+typed op table out of its own image until `Mount(app *zip.App)` broke the
+dependency the other way.
+
+The order is: hoist the shared types → move the package here → `cloud` imports
+this repo and mounts it, exactly as it mounts o11y. Moving the files before the
+hoist would produce a repo that cannot build, which is worse than the split
+that exists now.
+
+## Org layout
+
+- **hanzo-fi/** — the Formance forks (`ledger`, `payments`, `auth`, `gateway`,
+  `search`, `webhooks`, `stack`, `control`) plus `go-libs` and `numscript`.
+  Third-party lineage stays in its own org. `go get` targets
+  `github.com/hanzo-fi/numscript` (3 importers); the `hanzoai/numscript`
+  duplicate had none and is archived.
+- **hanzoai/finance** — this repo. Ours, original, OSS, top level: the umbrella
+  that stitches those pieces into one product and presents them to cloud as a
+  backend plugin.
