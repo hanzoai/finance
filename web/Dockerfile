@@ -11,25 +11,25 @@ WORKDIR /app
 # ── build (install + gate + next build in one stage) ─────────────────────────
 FROM base AS build
 # Install deps first so the layer caches on the lockfile. `.npmrc` (node-linker=hoisted)
-# MUST be present before install: the canonical stack dedupes the Tamagui/@hanzo-gui
-# graph into a single hoisted tree, which is what lets the GuiCustomConfig type
-# augmentation reach the @hanzo/ui + @hanzo/data raw-TSX source. Under the isolated
-# linker (no .npmrc) that augmentation is lost and the type gate fails on every vendor
-# shorthand prop (bg/items/justify/rounded/…). Installing in this stage (not a separate
-# deps stage) keeps the hoisted node_modules linker-agnostic — no per-package
-# node_modules to cherry-pick across stages.
+# MUST be present before install: the canonical stack dedupes the @hanzo/gui graph into a
+# single hoisted tree, which is what lets the GuiCustomConfig type augmentation (see
+# gui.d.ts → @hanzo/ui/gui-config) reach @hanzo/ui and the raw-TS @hanzo/data source.
+# Under the isolated linker (no .npmrc) that augmentation is lost and the type gate fails
+# on every vendor shorthand prop (bg/items/justify/rounded/…). Installing in this stage
+# (not a separate deps stage) keeps the hoisted node_modules linker-agnostic — no
+# per-package node_modules to cherry-pick across stages.
 COPY pnpm-workspace.yaml package.json pnpm-lock.yaml .npmrc ./
 COPY packages/finance-ui/package.json packages/finance-ui/
 COPY web/package.json web/
 RUN pnpm install --frozen-lockfile
 # Overlay source; `**/node_modules` is .dockerignored so the install above survives.
 COPY . .
-# The image build is the single CI gate (the arc runner is bare — no Node). Build the
-# shared package, run its unit tests, then type-check + build the Next app. A failing
-# test or type error fails the image build, so nothing broken can deploy.
+# The image build is the single CI gate (the bare runner has no Node). Type-check the
+# shared package (its `build` IS `tsgo --noEmit` — TypeScript 7 native, one command, not
+# a second spelling of the same check), run its unit tests, then build the Next app. A
+# failing test or type error fails the image build, so nothing broken can deploy.
 RUN pnpm --filter @hanzo/finance-ui build \
  && pnpm --filter @hanzo/finance-ui test \
- && pnpm --filter @hanzo/finance-ui typecheck \
  && pnpm --filter @hanzo/finance-web build
 
 # ── runtime (Next standalone) ────────────────────────────────────────────────

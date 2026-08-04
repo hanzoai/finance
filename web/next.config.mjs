@@ -1,4 +1,3 @@
-import { readdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
@@ -7,35 +6,28 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 /**
  * Hanzo Finance web — Next.js config.
  *
- * The shared @hanzo/finance-ui board is now built on the canonical @hanzo/ui (dashboard)
- * → @hanzo/gui (Tamagui) stack, consumed at RUNTIME (no optimizing compiler): the Gui
- * ESM/TSX source packages are transpiled by Next's `transpilePackages` and `GuiProvider`
- * injects CSS at runtime — exactly how the console consumes them. `react-native` is
- * aliased to `react-native-web` for the browser.
+ * The shared @hanzo/finance-ui board renders on the canonical @hanzo/ui (product layer)
+ * → @hanzo/gui (Tamagui primitives) stack, consumed at RUNTIME (no optimizing compiler):
+ * `GuiProvider` injects its CSS on mount — exactly how the console consumes them.
+ *
+ * As of 8.x, `@hanzo/gui` and every `@hanzogui/*` package ship BUILT dist (cjs + esm),
+ * so Next resolves them directly. Only the two packages that publish raw TypeScript
+ * source still need `transpilePackages`; the readdirSync sweep of ~114 `@hanzogui/*`
+ * directories that used to feed it is gone with them.
+ *
+ * `react-native` is aliased to `react-native-web` for the browser — react-native-svg,
+ * which the @hanzo/ui icon set imports, resolves through it.
  */
-
-/** Every installed `@hanzogui/*` package, discovered (not hardcoded), plus the source
- *  packages (@hanzo/gui / @hanzo/ui / @hanzo/data / @hanzo/finance-ui) that ship TSX. */
-function guiPackages() {
-  const dir = join(__dirname, 'node_modules', '@hanzogui')
-  let scoped = []
-  try {
-    scoped = readdirSync(dir).map((name) => `@hanzogui/${name}`)
-  } catch {
-    scoped = []
-  }
-  return ['@hanzo/gui', '@hanzo/ui', '@hanzo/data', '@hanzo/finance-ui', 'react-native-web', ...scoped]
-}
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   // Lean, self-contained server for the container image. `outputFileTracingRoot`
   // points at the pnpm-workspace root so the traced bundle includes the linked
-  // @hanzo/finance-ui package (and the hoisted @hanzogui/* graph).
+  // @hanzo/finance-ui package (and the hoisted @hanzo/* graph).
   output: 'standalone',
   outputFileTracingRoot: join(__dirname, '..'),
-  transpilePackages: guiPackages(),
+  transpilePackages: ['@hanzo/finance-ui', '@hanzo/data'],
   eslint: { ignoreDuringBuilds: true },
   experimental: {
     esmExternals: true,

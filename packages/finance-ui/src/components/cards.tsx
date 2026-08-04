@@ -7,7 +7,8 @@
  * themselves on @hanzo/gui + @hanzo/ui) — one component set across every finance scope.
  */
 import { Text, XStack } from '@hanzo/gui'
-import { SectionCard, StatCard, PreviewBanner, formatMoney } from './primitives'
+import { asColor } from '@hanzo/ui/product'
+import { POS, SectionCard, StatCard, PreviewBanner, formatMoney } from './primitives'
 import { formatDate } from '../format'
 import type { TreasurySummary } from '../types'
 
@@ -16,7 +17,7 @@ export function TreasuryOverview({ treasury }: { treasury: TreasurySummary }): R
     treasury.reserveCents > 0 ? Math.min(100, (treasury.committedCents / treasury.reserveCents) * 100) : 0
   const anchor = treasury.anchor
   const action = (
-    <Text fontSize="$1" fontWeight="600" px="$2" py="$1" rounded="$3" bg="$color3" color={anchor?.chainId ? ('#7ee787' as never) : '$color11'}>
+    <Text fontSize="$1" fontWeight="600" px="$2" py="$1" rounded="$3" bg="$color3" color={asColor(anchor?.chainId ? POS : '$color11')}>
       {anchor?.chainId ? `Anchored · chain ${anchor.chainId}` : 'Off-chain'}
     </Text>
   )

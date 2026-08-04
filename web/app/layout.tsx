@@ -1,3 +1,8 @@
+// The @hanzo/ui identity is self-contained CSS custom properties (`@hanzo/ui/theme.css`)
+// plus the motion/skeleton rules its components name — imported BEFORE the finance
+// brand chrome so `globals.css` layers on top of the fleet tokens, not under them.
+import '@hanzo/ui/theme.css'
+import '@hanzo/ui/styles/motion.css'
 import './globals.css'
 import type { Metadata, Viewport } from 'next'
 import { resolveConfig } from '~/config'
@@ -18,7 +23,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }): React.JSX.Element {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body>
         <GuiRoot>{children}</GuiRoot>
       </body>

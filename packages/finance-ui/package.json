@@ -1,6 +1,6 @@
 {
   "name": "@hanzo/finance-ui",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Shared finance data-layer + UI for Hanzo Finance surfaces (finance.hanzo.ai + Hanzo Cloud console + admin). ONE FinanceClient, ONE component set — rebuilt on the canonical @hanzo/ui (dashboard) → @hanzo/gui (Tamagui primitives) stack. Monochrome, theme-aware, USD cents.",
   "license": "BSD-3-Clause",
   "author": "Hanzo AI <dev@hanzo.ai>",
@@ -22,29 +22,28 @@
   },
   "files": ["src", "README.md"],
   "scripts": {
-    "build": "tsc --noEmit",
-    "typecheck": "tsc --noEmit",
+    "build": "tsgo --noEmit",
+    "typecheck": "tsgo --noEmit",
     "test": "vitest run",
     "prepublishOnly": "npm run typecheck"
   },
   "peerDependencies": {
-    "@hanzo/gui": ">=7.2.2",
-    "@hanzo/ui": ">=8.0.0",
-    "react": ">=18",
-    "react-dom": ">=18"
+    "@hanzo/gui": ">=8.0.1",
+    "@hanzo/ui": ">=8.0.39",
+    "react": ">=19",
+    "react-dom": ">=19"
   },
   "devDependencies": {
-    "@hanzo/data": "^1.2.0",
-    "@hanzo/gui": "^7.3.0",
-    "@hanzo/ui": "^8.0.0",
-    "@hanzogui/config": "^7.3.0",
-    "@hanzogui/lucide-icons-2": "^7.3.0",
-    "@hanzogui/next-theme": "^7.3.0",
+    "@hanzo/data": "^1.2.2",
+    "@hanzo/gui": "^8.0.1",
+    "@hanzo/ui": "^8.0.39",
+    "@hanzogui/config": "^8.0.1",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@typescript/native-preview": "^7.0.0-dev.20260707.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "typescript": "^5.6.0",
+    "typescript": "^5.9.3",
     "vitest": "^3.0.0"
   },
   "keywords": ["hanzo", "finance", "ledger", "billing", "fintech", "react", "tamagui"],
