@@ -8,7 +8,7 @@
  */
 import type { ReactNode } from 'react'
 import { Text, XStack, YStack } from '@hanzo/gui'
-import { DataTable, type Column } from '@hanzo/ui'
+import { DataTable, type Column } from '@hanzo/ui/product'
 import { FinanceEmpty, Money, StatusPill } from './primitives'
 import { cardLabel, formatCount, formatDate } from '../format'
 import type { Invoice, LedgerEntry, PaymentMethod, UsageLine } from '../types'
