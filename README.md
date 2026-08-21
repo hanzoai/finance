@@ -1,3 +1,10 @@
+> **Retired — this is a stale copy of `hanzoai/finance`.**
+>
+> Its 5 unique commits are carried into `hanzoai/finance` first — merged onto the default branch or pushed there as `carry/*` refs — so nothing here is lost. This copy has no push mirror, so those commits had reached nothing.
+>
+> It also declared `ghcr.io/hanzoai/finance-web`, the tag `hanzoai/finance` owns, so a push here
+> could have published over it. That declaration is removed.
+
 # finance
 
 Hanzo's native financial core — the single source of truth for money on the
