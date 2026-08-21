@@ -14,7 +14,7 @@
 import type { ReactNode } from 'react'
 import { useState } from 'react'
 import { Text, XStack, YStack } from '@hanzo/gui'
-import { DataTable, LineChart, type Column, type ChartPoint } from '@hanzo/ui'
+import { DataTable, LineChart, type Column, type ChartPoint } from '@hanzo/ui/product'
 import { FinanceRoot, StatCard, SectionCard, RangeSelector, Skeleton, FinanceErrorCard, PreviewBanner, Money, formatMoney } from './primitives'
 import { UsageBreakdown, InvoiceTable, PaymentMethodList, LedgerTable } from './tables'
 import { TreasuryOverview } from './cards'
