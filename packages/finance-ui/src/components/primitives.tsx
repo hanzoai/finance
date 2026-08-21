@@ -11,7 +11,7 @@
  */
 import type { ReactNode } from 'react'
 import { Button, Card, Text, Theme, XStack, YStack } from '@hanzo/gui'
-import { Sparkline as UiSparkline } from '@hanzo/ui'
+import { Sparkline as UiSparkline } from '@hanzo/ui/product'
 import { deltaPct, formatMoney, formatPct } from '../format'
 import { RANGES, rangeLabel, type Range } from '../types'
 
