@@ -20,7 +20,10 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["src", "README.md"],
+  "files": [
+    "src",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
@@ -45,7 +48,15 @@
     "typescript": "^5.9.3",
     "vitest": "^3.0.0"
   },
-  "keywords": ["hanzo", "finance", "ledger", "billing", "fintech", "react", "tamagui"],
+  "keywords": [
+    "hanzo",
+    "finance",
+    "ledger",
+    "billing",
+    "fintech",
+    "react",
+    "tamagui"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hanzoai/finance.git",
