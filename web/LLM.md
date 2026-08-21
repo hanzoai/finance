@@ -56,8 +56,17 @@ chunked). `AuthGate` gates `/app`; `/auth/refresh` rotates.
 
 ## Modes
 
-`NEXT_PUBLIC_FINANCE_MODE` = `preview` (default; stub + honest "Preview data" banner) or
-`live` (real `/v1/finance/*`). The console module is always live (honest states).
+`FINANCE_MODE` = `live` (default; real `/v1/finance/*`) or `preview` (stub + honest
+"Preview data" banner, for the landing screenshot and offline dev). The console module is
+always live (honest states).
+
+It is a SERVER variable and deliberately not `NEXT_PUBLIC_*`. Next inlines a
+`NEXT_PUBLIC_*` read into the client bundle when the image is BUILT, so the browser gets
+whatever the builder's environment said and a Deployment setting it at runtime is
+ignored — that shipped fabricated stub money to signed-in users on finance.hanzo.ai.
+`/app` is `force-dynamic`, `financeMode()` reads the env on the running server, and the
+value reaches the browser as a prop. One image, every environment. Live is the default so
+a missing variable yields an honest error, never invented numbers.
 
 ## Build / deploy
 

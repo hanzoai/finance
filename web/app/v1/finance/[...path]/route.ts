@@ -14,8 +14,7 @@ export const runtime = 'nodejs'
  * NOTE (audience): the `hanzo-finance` access token carries `aud=<brand>-finance`. The
  * cloud finance surface must trust that audience (the finance backend adds it to its
  * accepted auds), OR this BFF re-mints a `<brand>-cloud`-audience bearer via a
- * confidential mint client — the console pattern. Until `NEXT_PUBLIC_FINANCE_MODE=live`
- * the shell renders preview data and this route is not exercised.
+ * confidential mint client — the console pattern.
  */
 const ALLOWED = new Set(['balance', 'credits', 'usage', 'invoices', 'payment-methods', 'ledger', 'treasury'])
 

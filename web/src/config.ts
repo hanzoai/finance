@@ -4,6 +4,10 @@
  * serves finance.hanzo.ai / finance.lux.cloud / finance.zoo.cloud. Login uses the
  * per-brand `<org>-finance` OAuth app (Hanzo IAM, NOT Casdoor). `NEXT_PUBLIC_*`
  * overrides any field per deploy.
+ *
+ * Everything above the divider is derived from the HOST, so the browser can compute it.
+ * Anything derived from the ENVIRONMENT lives below the divider and is read on the
+ * server — see `financeMode`.
  */
 const trimSlash = (s: string) => s.replace(/\/+$/, '')
 
@@ -56,8 +60,6 @@ export type FinanceConfig = {
   appPath: string
   /** OAuth callback path — must match the app's registered redirect_uri. */
   callbackPath: string
-  /** 'preview' shows illustrative data; 'live' reads real /v1/finance/*. */
-  mode: 'preview' | 'live'
 }
 
 export function resolveConfig(host?: string | null): FinanceConfig {
@@ -74,7 +76,6 @@ export function resolveConfig(host?: string | null): FinanceConfig {
     homepage: b.homepage,
     appPath: '/app',
     callbackPath: '/auth/callback',
-    mode: process.env.NEXT_PUBLIC_FINANCE_MODE === 'live' ? 'live' : 'preview',
   }
 }
 
@@ -84,6 +85,17 @@ export const config: FinanceConfig = new Proxy({} as FinanceConfig, {
 })
 
 // ── server-only ───────────────────────────────────────────────────────────
+export type Mode = 'live' | 'preview'
+
+/**
+ * Which data the signed-in shell reads: `live` = the org's real `/v1/finance/*`,
+ * `preview` = the illustrative stub. Read on the server, per request, and handed to the
+ * browser as a prop (`app/app/page.tsx`) — a `NEXT_PUBLIC_*` read is inlined into the
+ * client bundle when the image is BUILT, which freezes one image to one environment.
+ * Live is the default: a signed-in user gets an honest error before invented money.
+ */
+export const financeMode = (): Mode => (process.env.FINANCE_MODE === 'preview' ? 'preview' : 'live')
+
 /** IAM issuer used server-side by the BFF (token exchange). Falls back to the client default. */
 export const serverIamUrl = () => trimSlash(process.env.IAM_URL ?? process.env.NEXT_PUBLIC_IAM_URL ?? 'https://hanzo.id')
 /** Cloud API base the /v1/finance BFF forwards to (gated api.hanzo.ai). */

@@ -1,7 +1,7 @@
 'use client'
 
 import { httpFinanceClient, stubFinanceClient, type FinanceClient } from '@hanzo/finance-ui'
-import { config } from '~/config'
+import type { Mode } from '~/config'
 
 /**
  * The browser transport for the live `/v1/finance/*` reads. It calls the app's OWN
@@ -24,10 +24,10 @@ async function transport(path: string, query?: Record<string, string | number | 
 }
 
 /**
- * The finance client for the app shell. `preview` (default until the backend is live)
- * renders deterministic illustrative data; `live` reads real per-org `/v1/finance/*`.
- * Flip with `NEXT_PUBLIC_FINANCE_MODE=live` — ZERO UI change.
+ * The finance client for the app shell. `live` reads real per-org `/v1/finance/*`;
+ * `preview` renders deterministic illustrative data. The host resolves the mode on the
+ * server (`financeMode`) and passes it in — ZERO UI change either way.
  */
-export function financeClient(): FinanceClient {
-  return config.mode === 'live' ? httpFinanceClient(transport) : stubFinanceClient()
+export function financeClient(mode: Mode): FinanceClient {
+  return mode === 'live' ? httpFinanceClient(transport) : stubFinanceClient()
 }
