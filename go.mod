@@ -1,3 +1,3 @@
-module github.com/hanzoai/finance
+module hanzo.ai/finance
 
 go 1.26.5
