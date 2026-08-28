@@ -1,3 +1,8 @@
 packages:
   - packages/*
   - web
+
+catalog:
+  '@hanzo/data': 1.2.4
+  '@hanzo/gui': 8.3.0
+  '@hanzo/ui': 8.25.0

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "Hanzo Finance — Go umbrella (native ledger, embedded in cloud) + web (finance.hanzo.ai) + @hanzo/finance-ui.",
-  "packageManager": "pnpm@9.15.9",
+  "packageManager": "pnpm@11.24.0",
   "scripts": {
     "build": "pnpm --filter @hanzo/finance-ui build && pnpm --filter @hanzo/finance-web build",
     "test": "pnpm --filter @hanzo/finance-ui test",

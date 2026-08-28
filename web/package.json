@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "@hanzo/finance-ui": "workspace:*",
-    "@hanzo/data": "^1.2.2",
-    "@hanzo/gui": "^8.0.1",
-    "@hanzo/ui": "^8.0.39",
+    "@hanzo/data": "catalog:",
+    "@hanzo/gui": "catalog:",
+    "@hanzo/ui": "catalog:",
     "@hanzogui/config": "^8.0.1",
     "@hanzogui/next-theme": "^8.0.0",
     "next": "15.5.19",

@@ -31,15 +31,15 @@
     "prepublishOnly": "npm run typecheck"
   },
   "peerDependencies": {
-    "@hanzo/gui": ">=8.0.1",
-    "@hanzo/ui": ">=8.0.39",
+    "@hanzo/gui": ">=8.3.0",
+    "@hanzo/ui": ">=8.25.0",
     "react": ">=19",
     "react-dom": ">=19"
   },
   "devDependencies": {
-    "@hanzo/data": "^1.2.2",
-    "@hanzo/gui": "^8.0.1",
-    "@hanzo/ui": "^8.0.39",
+    "@hanzo/data": "catalog:",
+    "@hanzo/gui": "catalog:",
+    "@hanzo/ui": "catalog:",
     "@hanzogui/config": "^8.0.1",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
