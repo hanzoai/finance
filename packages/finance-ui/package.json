@@ -1,7 +1,7 @@
 {
   "name": "@hanzo/finance-ui",
   "version": "0.2.2",
-  "description": "Shared finance data-layer + UI for Hanzo Finance surfaces (finance.hanzo.ai + Hanzo Cloud console + admin). ONE FinanceClient, ONE component set — rebuilt on the canonical @hanzo/ui (dashboard) → @hanzo/gui (Tamagui primitives) stack. Monochrome, theme-aware, USD cents.",
+  "description": "Shared finance data-layer + UI for Hanzo Finance surfaces (finance.hanzo.ai + Hanzo Cloud console + admin). ONE FinanceClient, ONE component set \u2014 rebuilt on the canonical @hanzo/ui (dashboard) \u2192 @hanzo/gui (Tamagui primitives) stack. Monochrome, theme-aware, USD cents.",
   "license": "BSD-3-Clause",
   "author": "Hanzo AI <dev@hanzo.ai>",
   "type": "module",
@@ -32,21 +32,21 @@
   },
   "peerDependencies": {
     "@hanzo/gui": ">=8.3.0",
-    "@hanzo/ui": ">=8.25.0",
-    "react": ">=19",
-    "react-dom": ">=19"
+    "@hanzo/ui": ">=8.27.0",
+    "react": ">=19.2.8",
+    "react-dom": ">=19.2.8"
   },
   "devDependencies": {
     "@hanzo/data": "catalog:",
     "@hanzo/gui": "catalog:",
     "@hanzo/ui": "catalog:",
-    "@hanzogui/config": "^8.0.1",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "typescript": "^5.9.3",
-    "vitest": "^3.0.0"
+    "@hanzogui/config": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "keywords": [
     "hanzo",

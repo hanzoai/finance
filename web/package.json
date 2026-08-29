@@ -2,7 +2,7 @@
   "name": "@hanzo/finance-web",
   "version": "0.1.0",
   "private": true,
-  "description": "finance.hanzo.ai — Hanzo Finance product landing, IAM login, and treasury/payments app shell.",
+  "description": "finance.hanzo.ai \u2014 Hanzo Finance product landing, IAM login, and treasury/payments app shell.",
   "license": "BSD-3-Clause",
   "author": "Hanzo AI <dev@hanzo.ai>",
   "scripts": {
@@ -16,19 +16,19 @@
     "@hanzo/data": "catalog:",
     "@hanzo/gui": "catalog:",
     "@hanzo/ui": "catalog:",
-    "@hanzogui/config": "^8.0.1",
-    "@hanzogui/next-theme": "^8.0.0",
-    "next": "15.5.19",
-    "react": "19.2.7",
-    "react-dom": "19.2.7",
-    "react-native-svg": "15.15.5",
-    "react-native-web": "0.21.2",
-    "server-only": "0.0.1"
+    "@hanzogui/config": "catalog:",
+    "@hanzogui/next-theme": "catalog:",
+    "next": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-native-svg": "catalog:",
+    "react-native-web": "catalog:",
+    "server-only": "catalog:"
   },
   "devDependencies": {
-    "@types/node": "22.20.0",
-    "@types/react": "19.2.17",
-    "@types/react-dom": "19.2.3",
-    "typescript": "^5.9.3"
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "typescript": "catalog:"
   }
 }
