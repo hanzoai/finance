@@ -7,6 +7,6 @@
  *
  *   import { httpFinanceClient, type FinanceClient } from '@hanzo/finance-ui/data'
  */
-export * from './types'
-export * from './format'
-export * from './client'
+export * from './types.js'
+export * from './format.js'
+export * from './client.js'

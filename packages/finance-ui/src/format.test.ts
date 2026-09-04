@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { formatMoney, formatMoneyCompact, formatCount, formatPct, formatDate, deltaPct, cardLabel } from './format'
+import { formatMoney, formatMoneyCompact, formatCount, formatPct, formatDate, deltaPct, cardLabel } from './format.js'
 
 describe('formatMoney', () => {
   it('formats cents as currency', () => {

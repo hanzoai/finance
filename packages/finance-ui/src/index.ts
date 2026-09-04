@@ -16,8 +16,8 @@
  * transport. Scope (which org, or all-orgs) is a property of the transport + identity,
  * never a different component.
  */
-export * from './data'
-export { useAsync, type AsyncState } from './hooks'
+export * from './data.js'
+export { useAsync, type AsyncState } from './hooks.js'
 
 export {
   FinanceRoot,
@@ -32,7 +32,7 @@ export {
   FinanceErrorCard,
   Skeleton,
   PreviewBanner,
-} from './components/primitives'
-export { UsageBreakdown, InvoiceTable, PaymentMethodList, LedgerTable } from './components/tables'
-export { TreasuryOverview } from './components/cards'
-export { FinanceDashboard, type FinanceDashboardProps } from './components/FinanceDashboard'
+} from './components/primitives.js'
+export { UsageBreakdown, InvoiceTable, PaymentMethodList, LedgerTable } from './components/tables.js'
+export { TreasuryOverview } from './components/cards.js'
+export { FinanceDashboard, type FinanceDashboardProps } from './components/FinanceDashboard.js'

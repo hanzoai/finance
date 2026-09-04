@@ -9,7 +9,7 @@ import {
   normalizeTreasury,
   httpFinanceClient,
   stubFinanceClient,
-} from './client'
+} from './client.js'
 
 describe('normalizeBalance', () => {
   it('maps a real payload field-for-field', () => {

@@ -9,9 +9,9 @@
 import type { ReactNode } from 'react'
 import { Text, XStack, YStack } from '@hanzo/gui'
 import { DataTable, type Column } from '@hanzo/ui/product'
-import { FinanceEmpty, Money, StatusPill } from './primitives'
-import { cardLabel, formatCount, formatDate } from '../format'
-import type { Invoice, LedgerEntry, PaymentMethod, UsageLine } from '../types'
+import { FinanceEmpty, Money, StatusPill } from './primitives.js'
+import { cardLabel, formatCount, formatDate } from '../format.js'
+import type { Invoice, LedgerEntry, PaymentMethod, UsageLine } from '../types.js'
 
 /** Open a hosted receipt / invoice in a new tab (client-only, SSR-guarded). */
 function openHref(href: string): void {

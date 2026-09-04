@@ -8,9 +8,9 @@
  */
 import { Text, XStack } from '@hanzo/gui'
 import { asColor } from '@hanzo/ui/product'
-import { POS, SectionCard, StatCard, PreviewBanner, formatMoney } from './primitives'
-import { formatDate } from '../format'
-import type { TreasurySummary } from '../types'
+import { POS, SectionCard, StatCard, PreviewBanner, formatMoney } from './primitives.js'
+import { formatDate } from '../format.js'
+import type { TreasurySummary } from '../types.js'
 
 export function TreasuryOverview({ treasury }: { treasury: TreasurySummary }): React.JSX.Element {
   const pctCommitted =
