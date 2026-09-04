@@ -23,9 +23,11 @@ npm i @hanzo/finance-ui @hanzo/ui @hanzo/gui
 are peers — the HOST provides the `GuiProvider`, and it should mount
 `@hanzo/ui/gui-config` (the one canonical scale) rather than a copy of it.
 
-This package ships TS source, and `@hanzo/data` (a `@hanzo/ui` peer) does too, so both
-belong in your bundler's `transpilePackages`. Nothing else does: as of 8.x `@hanzo/ui`,
-`@hanzo/gui` and every `@hanzogui/*` package ship built dist.
+This package ships built dist — ESM with declarations — so a consumer that loads it as
+JavaScript rather than through a bundler (a Node BFF route, an edge worker, a vitest
+suite) gets a module it can parse. `@hanzo/data` (a `@hanzo/ui` peer) still ships TS
+source and belongs in your bundler's `transpilePackages`; as of 8.x `@hanzo/ui`,
+`@hanzo/gui` and every `@hanzogui/*` package ship built dist, as does this one.
 
 ## Use
 

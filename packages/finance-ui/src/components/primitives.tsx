@@ -12,8 +12,8 @@
 import type { ReactNode } from 'react'
 import { Button, Card, Text, Theme, XStack, YStack } from '@hanzo/gui'
 import { Sparkline as UiSparkline, asColor } from '@hanzo/ui/product'
-import { deltaPct, formatMoney, formatPct } from '../format'
-import { RANGES, rangeLabel, type Range } from '../types'
+import { deltaPct, formatMoney, formatPct } from '../format.js'
+import { RANGES, rangeLabel, type Range } from '../types.js'
 
 /** Semantic sign colors — the ONE green/red pair for the whole finance surface
  *  (monochrome-first surfaces, a single accent hue only to signal +/-). Exported so no
