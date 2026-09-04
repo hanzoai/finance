@@ -42,6 +42,8 @@
     "@hanzo/gui": "catalog:",
     "@hanzo/ui": "catalog:",
     "@hanzogui/config": "catalog:",
+    "@hanzogui/core": "catalog:",
+    "@hanzogui/web": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "react": "catalog:",
