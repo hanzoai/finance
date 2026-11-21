@@ -1,5 +1,7 @@
 # finance
 
+[![Open in Hanzo](https://hanzo.app/badges/open-in-hanzo.svg)](https://hanzo.app/dev/open?repo=github.com/hanzoai/finance&ref=main&action=open) [![Edit with Hanzo](https://hanzo.app/badges/edit-with-hanzo.svg)](https://hanzo.app/dev/open?repo=github.com/hanzoai/finance&ref=main&action=edit) [![Deploy with Hanzo](https://hanzo.app/badges/deploy-with-hanzo.svg)](https://hanzo.app/dev/open?repo=github.com/hanzoai/finance&ref=main&action=deploy)
+
 Hanzo's native financial core — the single source of truth for money on the
 platform. One double-entry ledger, per-tenant on Hanzo Base, embedded in the
 unified cloud binary. Replaces the Formance stack with native Go; Rust services
